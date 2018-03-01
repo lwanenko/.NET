@@ -28,15 +28,22 @@ namespace CloudinaryDotnetCoreTest
         /// <returns></returns>
         public static async Task<string> UploadPhoto(Stream stream)
         {
-            var uploadParams = new ImageUploadParams()
-            {
-                File = new FileDescription("test", stream ),
-                Transformation = new Transformation().Crop("limit").Width(800).Height(800).FetchFormat("png"),
+            try
+            { 
+                var uploadParams = new ImageUploadParams()
+                {
+                    File = new FileDescription("test", stream ),
+                    Transformation = new Transformation().Crop("limit").Width(800).Height(800).FetchFormat("png"),
                
-            };
-            var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                };
+                var uploadResult = await cloudinary.UploadAsync(uploadParams);
 
-            return uploadResult.Uri.AbsoluteUri;
+                return uploadResult.Uri.AbsoluteUri;
+            }
+            catch
+            {
+                return @"http://res.cloudinary.com/tandtapp/image/upload/v1519912231/orange-error-512.png";
+            }
         }
 
         /// <summary>
@@ -57,6 +64,10 @@ namespace CloudinaryDotnetCoreTest
                 var uploadResult = await cloudinary.UploadAsync(uploadParams);
 
                 return uploadResult.Uri.AbsoluteUri;
+            }
+            catch
+            {
+                return @"http://res.cloudinary.com/tandtapp/image/upload/v1519912231/orange-error-512.png";
             }
         }
         
