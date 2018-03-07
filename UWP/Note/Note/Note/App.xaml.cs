@@ -5,6 +5,7 @@ using Note.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Autofac;
+using Note.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Note
@@ -31,6 +32,9 @@ namespace Note
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
+
+
+            containerRegistry.RegisterSingleton<ISaveService, SaveService>();
         }
     }
 }

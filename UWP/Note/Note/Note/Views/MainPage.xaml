@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Note.Views.MainPage"
              Title="{Binding Title}">
-
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="ку" />
-    </StackLayout>
-
+    <ContentPage.ToolbarItems >
+        <ToolbarItem  Text="Save" IsDestructive="True" Order="Primary" Command="{Binding SaveCommand}" />
+    </ContentPage.ToolbarItems>
+    <Grid Padding="5,15">
+        <Editor Text="{Binding EditorText}" />
+    </Grid>
 </ContentPage>
