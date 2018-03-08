@@ -42,13 +42,13 @@ namespace Note.ViewModels
                 .ObservesProperty(() => EditorText);
 
         }
+        
+        #endregion
 
         private void BackExecuted()
         {
            EditorText = saveService.GetText();
         }
-        #endregion
-
         private async void SaveExecuted()
         {
             saveService.Save(_editorText);
