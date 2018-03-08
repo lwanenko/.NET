@@ -24,7 +24,7 @@ namespace Note.ViewModels
         }
 
         public DelegateCommand SaveCommand { get; }
-
+        public DelegateCommand BackCommand { get; }
         #endregion
 
         #region CTOR
@@ -34,17 +34,24 @@ namespace Note.ViewModels
         {
             this.saveService = saveService;
             this.pageDialogService = pageDialogService;
-
+            EditorText = saveService.GetText();
             Title = "ChIt Note";
+            BackCommand = new DelegateCommand(BackExecuted)
+                .ObservesProperty(() => EditorText);
             SaveCommand = new DelegateCommand(SaveExecuted)
                 .ObservesProperty(() => EditorText);
 
+        }
+
+        private void BackExecuted()
+        {
+           EditorText = saveService.GetText();
         }
         #endregion
 
         private async void SaveExecuted()
         {
-            await saveService.Save(_editorText);
+            saveService.Save(_editorText);
             await pageDialogService.DisplayAlertAsync("Save","Текст успішно збережено","Ok");
         }
 

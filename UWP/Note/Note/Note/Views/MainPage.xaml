@@ -5,6 +5,7 @@
              Title="{Binding Title}">
     <ContentPage.ToolbarItems >
         <ToolbarItem  Text="Save" IsDestructive="True" Order="Primary" Command="{Binding SaveCommand}" />
+        <ToolbarItem  Text="Back" IsDestructive="True" Order="Primary" Command="{Binding BackCommand}" />
     </ContentPage.ToolbarItems>
     <Grid Padding="5,15">
         <Editor Text="{Binding EditorText}" />

@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Note.Helpers;
 
 namespace Note.Services
 {
     public class SaveService : ISaveService
     {
-        public async Task Save(string text)
+        public string GetText()
         {
-            
+            return Settings.Text;
+        }
+
+        public void Save(string text)
+        {
+            Settings.Text = text;
         }
     }
 }

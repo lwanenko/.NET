@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Note.Services
+﻿namespace Note.Services
 {
     public interface ISaveService
     {
-        Task Save(string text);
+        void Save(string text);
+
+        string GetText();
     }
 }
