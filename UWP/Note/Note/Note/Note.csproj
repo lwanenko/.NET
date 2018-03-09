@@ -5,9 +5,43 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\back.png" />
+    <None Remove="Images\down.png" />
+    <None Remove="Images\google-plus.png" />
+    <None Remove="Images\locked.png" />
+    <None Remove="Images\music.png" />
+    <None Remove="Images\note.png" />
+    <None Remove="Images\search.png" />
+    <None Remove="Images\unlocked.png" />
+    <None Remove="Images\up.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\back.png" />
+    <EmbeddedResource Include="Images\google-plus.png" />
+    <EmbeddedResource Include="Images\unlocked.png" />
+    <EmbeddedResource Include="Images\locked.png" />
+    <EmbeddedResource Include="Images\music.png" />
+    <EmbeddedResource Include="Images\down.png" />
+    <EmbeddedResource Include="Images\up.png" />
+    <EmbeddedResource Include="Images\search.png" />
+    <EmbeddedResource Include="Images\note.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
     <PackageReference Include="Prism.Autofac.Forms" Version="7.0.0.362" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\PasPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

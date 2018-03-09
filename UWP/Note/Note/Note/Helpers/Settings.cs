@@ -22,11 +22,25 @@ namespace Note.Helpers
 
         public static string Text
         {
-            get {
+            get 
+            {
                 return AppSettings.GetValueOrDefault(SettingsKey, SettingsDefault,"textVal");
             }
-            set {
+            set
+            {
                 AppSettings.AddOrUpdateValue(SettingsKey, value, "textVal");
+            }
+        }
+
+        public static string HashPas 
+        {
+            get 
+            {
+                return AppSettings.GetValueOrDefault(SettingsKey, SettingsDefault);
+            }
+            set 
+            {
+                AppSettings.AddOrUpdateValue(SettingsKey, value);
             }
         }
 

@@ -1,12 +1,10 @@
-﻿using Note.Services;
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Note.Services;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Note.ViewModels
 {
@@ -15,6 +13,7 @@ namespace Note.ViewModels
         #region VAR
 
         private ISaveService saveService;
+        private IPasService pasService;
         private IPageDialogService pageDialogService;
 
         private string _editorText;
@@ -29,30 +28,40 @@ namespace Note.ViewModels
 
         #region CTOR
 
-        public MainPageViewModel(INavigationService navigationService, ISaveService saveService, IPageDialogService pageDialogService) 
+        public MainPageViewModel(IPasService pasService, INavigationService navigationService, ISaveService saveService, IPageDialogService pageDialogService) 
             : base (navigationService)
         {
+            this.pasService = pasService;
             this.saveService = saveService;
             this.pageDialogService = pageDialogService;
-            EditorText = saveService.GetText();
+
+            if (pasService.isOpen)
+                EditorText = saveService.GetText();
+                
             Title = "ChIt Note";
             BackCommand = new DelegateCommand(BackExecuted)
                 .ObservesProperty(() => EditorText);
             SaveCommand = new DelegateCommand(SaveExecuted)
                 .ObservesProperty(() => EditorText);
-
         }
-        
+
         #endregion
+
 
         private void BackExecuted()
         {
-           EditorText = saveService.GetText();
+            if (pasService.isOpen)
+                EditorText = saveService.GetText();
         }
         private async void SaveExecuted()
         {
-            saveService.Save(_editorText);
-            await pageDialogService.DisplayAlertAsync("Save","Текст успішно збережено","Ok");
+            if (pasService.isOpen)
+            {
+                saveService.Save(_editorText);
+                await pageDialogService.DisplayAlertAsync("Save", "Текст успішно збережено", "Ok");
+            }
+            else
+                await pageDialogService.DisplayAlertAsync("Save", "Текст не може зберігатися", "Ok");
         }
 
        

@@ -25,17 +25,18 @@ namespace Note
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/PasPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
-
+            containerRegistry.RegisterForNavigation<PasPage>();
 
             containerRegistry.RegisterSingleton<ISaveService, SaveService>();
             containerRegistry.RegisterSingleton<IPasService, PasService>();
+            containerRegistry.RegisterForNavigation<PasPage>();
         }
     }
 }
