@@ -20,11 +20,17 @@ namespace Note.ViewModels
         private string _editorText;
         public string EditorText {
             get { return _editorText; }
-            set { SetProperty(ref _editorText, value); SetProperty(ref _editorText, value, "TextLength"); }
+            set 
+            {
+                SetProperty(ref _editorText, value);
+                SetProperty(ref _length, value.Length);
+            }
         }
 
+        private int _length;
         public  string TextLength {
-            get { return "Length: " + _editorText.Length; }
+            get { return "Length: " + _length;}
+            
         } 
 
         public DelegateCommand SaveCommand { get; }
