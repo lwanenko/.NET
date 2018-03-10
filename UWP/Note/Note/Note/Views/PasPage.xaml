@@ -4,17 +4,44 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Note.Views.PasPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"            
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False">
-    <StackLayout >
-        <Grid>
-                
-        </Grid>
-        <Entry Margin="15, 10"
+    <Grid BackgroundColor="#C5CAE9">
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="*"/>
+            <RowDefinition  Height="50"/>
+            <RowDefinition  Height="50"/>
+            <RowDefinition  Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width = "*"/>
+            <ColumnDefinition  Width = "2*"/>
+            <ColumnDefinition  Width = "*"/>
+        </Grid.ColumnDefinitions>
+        <Entry 
+               Grid.Row="1"
+               Grid.Column="1"               
+               BackgroundColor="White"
                IsPassword="True"
-               BackgroundColor="Aqua"
-               Placeholder="Password"
-               Text="{Binding PasLabel}"/> 
-    </StackLayout>
+               PlaceholderColor="Gray"
+               Placeholder="Password"                              
+               Text="{Binding PasLabel}"               
+               HorizontalOptions="Fill"
+               VerticalOptions="CenterAndExpand"/>
+        
+        <Button 
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Grid.Row="2"
+                Grid.Column="1"
+                BackgroundColor="#3F51B5"
+                WidthRequest="150"
+                TextColor="WhiteSmoke"
+                FontAttributes="Bold"
+                BorderColor="Gray"
+                Command="{Binding ButtonCommand}"
+                Text="{Binding ButtonText}"/>
+    </Grid>
 
 </ContentPage>

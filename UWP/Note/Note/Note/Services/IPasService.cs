@@ -2,10 +2,11 @@
 {
     public interface IPasService
     {
-        bool isOpen { get; }
-        bool havePas { get;  }
-        bool GetNewPas( string newPas, string oldPas );
+        bool IsOpen { get; }
+        bool HavePas { get;  }
+        bool NewPas( string newPas, string oldPas );
         void AddPas(string pas);
         bool Open(string pas);
+        void Close();
     }
 }

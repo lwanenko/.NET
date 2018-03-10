@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FFImageLoading;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -70,6 +71,17 @@ namespace Note.UWP
                 // parameter
                 rootFrame.Navigate(typeof(MainPage), e.Arguments);
             }
+
+            FFImageLoading.Forms.WinUWP.CachedImageRenderer.Init();
+
+            var config = new FFImageLoading.Config.Configuration()
+            {
+                VerboseLogging = false,
+                VerbosePerformanceLogging = false,
+                VerboseMemoryCacheLogging = false,
+                VerboseLoadingCancelledLogging = false,
+            };
+            ImageService.Instance.Initialize(config);
             // Ensure the current window is active
             Window.Current.Activate();
         }

@@ -6,6 +6,7 @@ using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace Note.ViewModels
 {
@@ -21,31 +22,59 @@ namespace Note.ViewModels
             set { SetProperty(ref _pasLabel, value); }
         }
 
+        private string _butText;
+        public string ButtonText {
+            get { return _butText; }
+            set { SetProperty(ref _butText, value); }
+        }
 
-        public DelegateCommand UnLockCommand { get; private set; }
-        public DelegateCommand AddPasCommand { get; private set; }
+        public DelegateCommand ButtonCommand { get; set; }
 
-        public PasPageViewModel(IPasService pasService, INavigationService navigationService, ISaveService saveService, IPageDialogService pageDialogService)
-            : base(navigationService)
+        public PasPageViewModel(IPasService pasService,
+                                INavigationService navigationService, 
+                                ISaveService saveService, 
+                                IPageDialogService pageDialogService): base(navigationService)
         {
             this.pasService = pasService;
             this.saveService = saveService;
             this.pageDialogService = pageDialogService;
-            UnLockCommand = new DelegateCommand(UnLockExecuted);
-            AddPasCommand = new DelegateCommand(AddPasExecuted);
+
+            ButtonCommand = new DelegateCommand(ButtonExecuted);
+            if (pasService.HavePas)        
+                ButtonText = "Unlock";
+            else
+                ButtonText = "Add Password"; 
+        }
+
+        private void ButtonExecuted()
+        {
+            if (pasService.HavePas)
+                UnLockExecuted();
+            else
+                AddPasExecuted();
         }
 
         private async void AddPasExecuted()
         {
-            pasService.AddPas(PasLabel);
-            await pageDialogService.DisplayAlertAsync("", "Password Add", "Ok");
+            if ( PasLabel.Length != 0)
+            {
+                pasService.AddPas(PasLabel);
+                ButtonText = "Unlock";
+                await pageDialogService.DisplayAlertAsync("", "Password Add", "OK");
+            }
+            else 
+                await pageDialogService.DisplayAlertAsync("Ooooh", "Error","OK");
         }
 
         private async void UnLockExecuted()
         {
-            
             if (pasService.Open(PasLabel))
-                await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            {
+                PasLabel = "";
+                await NavigationService.GoBackAsync();
+                await NavigationService.NavigateAsync("MainPage");
+
+            }
             else
                 await pageDialogService.DisplayAlertAsync("Erorr", "Fail Password", "Ok");
         }

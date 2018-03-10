@@ -9,26 +9,22 @@ namespace Note.Services
     {
         #region VAR 
 
-        public bool isOpen { get; private set; } = false;
-        public bool havePas 
-        {
-            get 
-            {
-                if (PasHesh.Length > 0)
+        public bool IsOpen { get; private set; } = false;
+
+        public bool HavePas {
+            get {
+                if (Settings.HashPas.Length > 0)
                     return true;
                 return false;
             }
         }
-
-        private string PasHesh = Settings.HashPas;
-
         #endregion
 
-        public bool GetNewPas(string newPas, string oldPas = "")
+        public bool NewPas(string newPas, string oldPas = "")
         {
             if (Open(oldPas))
             {
-                Settings.HashPas = GetHesh(newPas); 
+                Settings.HashPas = GetHash(newPas); 
                 return true;
             }
             return false;
@@ -36,19 +32,26 @@ namespace Note.Services
 
         public bool Open(string pas)
         {
-            if (PasHesh == GetHesh(pas))
-                return true;
-            return false;
+            if (Settings.HashPas == GetHash(pas))
+                IsOpen = true;
+            return IsOpen;
         }
 
-        private static string GetHesh(string pas)
+        public void Close()
         {
-            return pas;
+            IsOpen = false;
         }
 
         public void AddPas(string pas)
         {
-            PasHesh = GetHesh(pas);
+            Settings.HashPas = GetHash(pas);
         }
+
+        private static string GetHash(string pas)
+        {
+            return pas;
+        }
+
+        
     }
 }

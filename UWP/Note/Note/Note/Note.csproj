@@ -5,31 +5,36 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\back.png" />
-    <None Remove="Images\down.png" />
-    <None Remove="Images\google-plus.png" />
-    <None Remove="Images\locked.png" />
-    <None Remove="Images\music.png" />
-    <None Remove="Images\note.png" />
-    <None Remove="Images\search.png" />
-    <None Remove="Images\unlocked.png" />
-    <None Remove="Images\up.png" />
+    <None Remove="Resources\back.png" />
+    <None Remove="Resources\down.png" />
+    <None Remove="Resources\google-plus.png" />
+    <None Remove="Resources\locked.png" />
+    <None Remove="Resources\music.png" />
+    <None Remove="Resources\note.png" />
+    <None Remove="Resources\save.png" />
+    <None Remove="Resources\search.png" />
+    <None Remove="Resources\unlocked.png" />
+    <None Remove="Resources\up.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Images\back.png" />
-    <EmbeddedResource Include="Images\google-plus.png" />
-    <EmbeddedResource Include="Images\unlocked.png" />
-    <EmbeddedResource Include="Images\locked.png" />
-    <EmbeddedResource Include="Images\music.png" />
-    <EmbeddedResource Include="Images\down.png" />
-    <EmbeddedResource Include="Images\up.png" />
-    <EmbeddedResource Include="Images\search.png" />
-    <EmbeddedResource Include="Images\note.png" />
+    <EmbeddedResource Include="Resources\back.png" />
+    <EmbeddedResource Include="Resources\down.png" />
+    <EmbeddedResource Include="Resources\google-plus.png" />
+    <EmbeddedResource Include="Resources\locked.png" />
+    <EmbeddedResource Include="Resources\music.png" />
+    <EmbeddedResource Include="Resources\note.png" />
+    <EmbeddedResource Include="Resources\save.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\search.png" />
+    <EmbeddedResource Include="Resources\unlocked.png" />
+    <EmbeddedResource Include="Resources\up.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.3.4" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
     <PackageReference Include="Prism.Autofac.Forms" Version="7.0.0.362" />
   </ItemGroup>

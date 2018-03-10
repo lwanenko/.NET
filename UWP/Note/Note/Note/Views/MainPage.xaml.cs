@@ -7,8 +7,8 @@ namespace Note.Views
 		public MainPage ()
 		{
 			InitializeComponent ();
-            
-		}
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
 
 	}
 }

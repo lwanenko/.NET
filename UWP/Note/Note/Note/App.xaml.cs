@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Autofac;
 using Note.Services;
+using System;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Note
@@ -24,19 +25,17 @@ namespace Note
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
-            await NavigationService.NavigateAsync("NavigationPage/PasPage");
+            await NavigationService.NavigateAsync(new Uri("PasPage", UriKind.Relative));           
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage>();
-            containerRegistry.RegisterForNavigation<PasPage>();
+            containerRegistry.RegisterForNavigation<MainPage>("MainPage");
+            containerRegistry.RegisterForNavigation<PasPage>("PasPage");
 
             containerRegistry.RegisterSingleton<ISaveService, SaveService>();
             containerRegistry.RegisterSingleton<IPasService, PasService>();
-            containerRegistry.RegisterForNavigation<PasPage>();
         }
     }
 }
