@@ -11,7 +11,7 @@
         <Grid.RowDefinitions>
             <RowDefinition  Height="45"/>
             <RowDefinition  Height="*"/>
-            <RowDefinition  Height="15"/>
+            <RowDefinition  Height="21"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition  Width="*"/>
@@ -55,6 +55,10 @@
         <Editor Margin="1, 2"
                 Grid.Row="1"               
                 Text="{Binding EditorText}" />
-        <!--<Label Grid.Row="2" Text="{Binding TextLength}"/>-->
+        <Label Margin="1, 1"
+               Grid.Row="2"
+               Text="{Binding TextLength}"
+               FontAttributes="Bold"
+               FontSize="12"/>
     </Grid>
 </ContentPage>

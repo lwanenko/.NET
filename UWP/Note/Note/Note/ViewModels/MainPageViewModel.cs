@@ -23,14 +23,14 @@ namespace Note.ViewModels
             set 
             {
                 SetProperty(ref _editorText, value);
-                SetProperty(ref _length, value.Length);
+                TextLength = value;
             }
         }
 
         private int _length;
         public  string TextLength {
             get { return "Length: " + _length;}
-            
+            set { SetProperty(ref _length, value.Length); }
         } 
 
         public DelegateCommand SaveCommand { get; }
