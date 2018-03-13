@@ -1,4 +1,5 @@
-﻿using Note.Services;
+﻿using Note.Models;
+using Note.Services;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -26,6 +27,18 @@ namespace Note.ViewModels
         public string ButtonText {
             get { return _butText; }
             set { SetProperty(ref _butText, value); }
+        }
+
+        private User user = new User();
+        public string UserName 
+        {
+            get { return user.Name; }
+            set { SetProperty(ref user.Name, value); }
+        }
+        public string AvatarUrl 
+        {
+            get { return user.AvatarUrl; }
+            set { SetProperty(ref user.AvatarUrl, value); }
         }
 
         public DelegateCommand ButtonCommand { get; set; }
