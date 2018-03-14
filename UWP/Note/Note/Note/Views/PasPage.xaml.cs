@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FFImageLoading.Forms;
+using System;
 using Xamarin.Forms;
 
 namespace Note.Views
@@ -9,23 +10,23 @@ namespace Note.Views
         {
             InitializeComponent();
 
-            var GooglePlusLogo = new Image();
+            var GooglePlusLogo = new CachedImage();
             TapGestureRecognizer TappedRecognizer = new TapGestureRecognizer();
             TappedRecognizer.Tapped += GPlusTapped;
             GooglePlusLogo.GestureRecognizers.Add(TappedRecognizer);
 
-            var TwitterLogo = new Image();
+            var TwitterLogo = new CachedImage();
             TapGestureRecognizer TappedRecognizerTwit = new TapGestureRecognizer();
             TappedRecognizerTwit.Tapped += GPlusTapped;
             TwitterLogo.GestureRecognizers.Add(TappedRecognizerTwit);
 
-            var MicrosoftLogo = new Image();
+            var MicrosoftLogo = new CachedImage();
             TapGestureRecognizer TappedRecognizerMicro = new TapGestureRecognizer();
             TappedRecognizerMicro.Tapped += GPlusTapped;
             MicrosoftLogo.GestureRecognizers.Add(TappedRecognizerMicro);
 
 
-            var OutlookLogo = new Image();
+            var OutlookLogo = new CachedImage();
             TapGestureRecognizer TappedRecognizerOut = new TapGestureRecognizer();
             TappedRecognizerOut.Tapped += GPlusTapped;
             MicrosoftLogo.GestureRecognizers.Add(TappedRecognizerOut);
@@ -54,7 +55,6 @@ namespace Note.Views
 
         private void GPlusTapped(object sender, EventArgs e)
         {
-           
         }
     }
 }

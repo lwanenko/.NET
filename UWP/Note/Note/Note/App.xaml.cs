@@ -36,6 +36,7 @@ namespace Note
 
             containerRegistry.RegisterSingleton<ISaveService, SaveService>();
             containerRegistry.RegisterSingleton<IPasService, PasService>();
+            containerRegistry.RegisterForNavigation<NoteTabPage>();
         }
     }
 }
