@@ -14,7 +14,7 @@ namespace Note.ViewModels
         #region VAR
 
         private ISaveService saveService;
-        private IPasService pasService;
+        private IUserService pasService;
         private IPageDialogService pageDialogService;
 
         private string _editorText;
@@ -40,7 +40,7 @@ namespace Note.ViewModels
 
         #region CTOR
 
-        public MainPageViewModel(IPasService        pasService,
+        public MainPageViewModel(IUserService        pasService,
                                  INavigationService navigationService,
                                  ISaveService       saveService,
                                  IPageDialogService pageDialogService) : base (navigationService)
@@ -63,7 +63,7 @@ namespace Note.ViewModels
 
         private async void LockExecuted()
         {
-            pasService.Close();            
+            pasService.CloseNotes();            
             await NavigationService.GoBackAsync();
             await NavigationService.NavigateAsync(new Uri("PasPage", UriKind.Relative));
         }

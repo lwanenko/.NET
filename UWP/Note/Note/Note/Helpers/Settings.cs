@@ -1,4 +1,5 @@
-﻿using Plugin.Settings;
+﻿using Note.Models;
+using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,16 @@ namespace Note.Helpers
             }
         }
 
+        public static User User
+        {
+            get 
+            {
+                return AppSettings.GetValueOrDefault(SettingsKey, SettingsDefault);
+            }
+            set {
+                AppSettings.AddOrUpdateValue(SettingsKey, value);
+            }
+        }
 
         #endregion
     }

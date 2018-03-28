@@ -25,7 +25,7 @@ namespace Note
         protected override async void OnInitialized()
         {
             InitializeComponent();
-            await NavigationService.NavigateAsync(new Uri("PasPage", UriKind.Relative));           
+            await NavigationService.NavigateAsync(new Uri("NoteTabPage", UriKind.Relative));           
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -33,9 +33,10 @@ namespace Note
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>("MainPage");
             containerRegistry.RegisterForNavigation<PasPage>("PasPage");
+            containerRegistry.RegisterForNavigation<NoteTabPage>("NoteTabPage");
 
             containerRegistry.RegisterSingleton<ISaveService, SaveService>();
-            containerRegistry.RegisterSingleton<IPasService, PasService>();
+            containerRegistry.RegisterSingleton<IUserService, UserService>();
             containerRegistry.RegisterForNavigation<NoteTabPage>();
         }
     }

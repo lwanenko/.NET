@@ -13,7 +13,7 @@ namespace Note.ViewModels
 {
 	public class PasPageViewModel : ViewModelBase
 	{
-        private readonly IPasService pasService;
+        private readonly IUserService pasService;
         private ISaveService saveService;
         private readonly IPageDialogService pageDialogService;
 
@@ -43,7 +43,7 @@ namespace Note.ViewModels
 
         public DelegateCommand ButtonCommand { get; set; }
 
-        public PasPageViewModel(IPasService pasService,
+        public PasPageViewModel(IUserService pasService,
                                 INavigationService navigationService, 
                                 ISaveService saveService, 
                                 IPageDialogService pageDialogService): base(navigationService)
@@ -81,7 +81,7 @@ namespace Note.ViewModels
 
         private async void UnLockExecuted()
         {
-            if (pasService.Open(PasLabel))
+            if (pasService.OpenNotes(PasLabel))
             {
                 PasLabel = "";
                 await NavigationService.GoBackAsync();

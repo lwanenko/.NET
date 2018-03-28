@@ -1,6 +1,6 @@
 ﻿namespace Note.Services
 {
-    public interface IPasService
+    public interface IUserService
     {
         bool IsOpen { get; }
 
@@ -10,8 +10,8 @@
 
         void AddPas(string pas);
 
-        bool Open(string pas);
+        bool OpenNotes(string pas);
 
-        void Close();
+        void CloseNotes();
     }
 }

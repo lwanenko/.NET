@@ -8,6 +8,9 @@ namespace Note.ViewModels
         protected INavigationService NavigationService { get; private set; }
 
         private string _title;
+        /// <summary>
+        /// Page Title 
+        /// </summary>
         public string Title
         {
             get { return _title; }
