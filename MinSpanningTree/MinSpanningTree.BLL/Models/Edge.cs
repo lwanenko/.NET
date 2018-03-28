@@ -12,7 +12,7 @@ namespace MinSpanningTree.BLL.Models
 
         public Edge(Point p1, Point p2)
         {
-            Length = p1.Length(p2);
+            Length = p1.DistanceTo(p2);
             First = p1;
             Second = p2;
         }

@@ -8,7 +8,6 @@ namespace MinSpanningTree.BLL.Models
     /// </summary>
     public class Graph
     {
-        //
         public  List<Edge> Edges { get; set; }
 
         public List<Point> Vertices { get; set; }
@@ -16,7 +15,6 @@ namespace MinSpanningTree.BLL.Models
         public Graph(List<Point> vertices)
         {
             Vertices = vertices;
-
 
         }
 
