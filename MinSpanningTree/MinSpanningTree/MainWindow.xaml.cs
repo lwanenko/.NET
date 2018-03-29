@@ -1,17 +1,10 @@
-﻿using System;
+﻿using MinSpanningTree.BLL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MinSpanningTree.UI
 {
@@ -23,6 +16,14 @@ namespace MinSpanningTree.UI
         public MainWindow()
         {
             InitializeComponent();
+            List<BLL.Models.Point> Points = new List<BLL.Models.Point>();
+            for (int i = 0; i < 5; i++)
+            {
+                var point = new BLL.Models.Point(0, 0);
+                Points.Add(point);
+            }
+            var tree = new MinSpanningTree.BLL.SpanningTree(Points);
+
         }
     }
 }

@@ -6,6 +6,8 @@ namespace MinSpanningTree.BLL.Models
 {
     public class Triad
     {
+        public List<Point> points;
+
         public int a, b, c;
         public int ab, bc, ac;  // adjacent edges index to neighbouring triangle.
 
@@ -26,7 +28,7 @@ namespace MinSpanningTree.BLL.Models
             this.ab = ab;
             this.bc = bc;
             this.ac = ac;
-
+            this.points = points;
             FindCircumcirclePrecisely(points);
         }
 

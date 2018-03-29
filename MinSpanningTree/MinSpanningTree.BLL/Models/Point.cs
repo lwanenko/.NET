@@ -16,6 +16,7 @@ namespace MinSpanningTree.BLL.Models
 
             this.y = y;
         }
+
         public Point()
         {
                 
@@ -31,5 +32,6 @@ namespace MinSpanningTree.BLL.Models
         {
             return $"({x},{y})";
         }
+
     }
 }
