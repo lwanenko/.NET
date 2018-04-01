@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.27428.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinSpanningTree.UI", "MinSpanningTree\MinSpanningTree.UI.csproj", "{86124776-0E46-4C39-AA5D-BF1A520459CD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinSpanningTree.BLL", "MinSpanningTree.BLL\MinSpanningTree.BLL.csproj", "{E1618678-B744-4FA9-8140-1E994B3BE4D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinSpanningTree.Console", "MinSpanningTree.Console\MinSpanningTree.Console.csproj", "{0419468F-CC33-419F-8396-AB87BF19F2E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinSpanningTree.Console", "MinSpanningTree.Console\MinSpanningTree.Console.csproj", "{0419468F-CC33-419F-8396-AB87BF19F2E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triangulator", "Triangulator\Triangulator.csproj", "{2035B711-CABA-407D-9B92-755D2C80D673}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{86124776-0E46-4C39-AA5D-BF1A520459CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86124776-0E46-4C39-AA5D-BF1A520459CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86124776-0E46-4C39-AA5D-BF1A520459CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1618678-B744-4FA9-8140-1E994B3BE4D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1618678-B744-4FA9-8140-1E994B3BE4D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1618678-B744-4FA9-8140-1E994B3BE4D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1618678-B744-4FA9-8140-1E994B3BE4D9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0419468F-CC33-419F-8396-AB87BF19F2E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0419468F-CC33-419F-8396-AB87BF19F2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0419468F-CC33-419F-8396-AB87BF19F2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0419468F-CC33-419F-8396-AB87BF19F2E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2035B711-CABA-407D-9B92-755D2C80D673}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2035B711-CABA-407D-9B92-755D2C80D673}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2035B711-CABA-407D-9B92-755D2C80D673}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2035B711-CABA-407D-9B92-755D2C80D673}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
