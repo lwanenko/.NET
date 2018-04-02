@@ -8,8 +8,30 @@
         mc:Ignorable="d"
         Title="Мінімальне кістякове дерево Іваненко ВА" >
     <Grid>
-        <oxy:Plot x:Name="plot" Title="{Binding Title}">
-            
-        </oxy:Plot>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <oxy:Plot Grid.Column="0" Grid.Row="0" x:Name="plot" Title="{Binding Title}"/>
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="x" Grid.Row="0"   />
+            <TextBox x:Name="y" Grid.Row="1"  />
+            <Button  Grid.Row="2" Content="Додати точку"  Click="AddPointCommand"/>
+            <Button   Grid.Row="3" Content="Побудувати Дерево" Click ="ReloadCommand"/>
+            <Button   Grid.Row="4" Content="Додати випадкову точку" Click ="AddRandCommand"/>
+            <Button   Grid.Row="5" Content="Зберегти" Click ="SaveCommand"/>
+        </Grid>
     </Grid>
 </Window>
