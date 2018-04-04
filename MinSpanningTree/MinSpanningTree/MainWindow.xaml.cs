@@ -1,14 +1,11 @@
-﻿using MinSpanningTree.Services;
+﻿using Kruskal;
+using MinSpanningTree.Services;
 using OxyPlot;
+using OxyPlot.Axes;
 using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media;
 
 namespace MinSpanningTree.UI
 {
@@ -17,34 +14,61 @@ namespace MinSpanningTree.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string Title { get; private set; }
+        public static readonly DependencyProperty ModelProperty;
+
         public List< List<DataPoint> > Lines { get; private set; }
         public HashSet<DataPoint> Points { get; set; }
+
+        public PlotModel Model { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
+
             
+
             Lines = new List<List<DataPoint>>();
             Points = PointService.GetPoints();
+
             ReloadCommand(null,null);
+            this.DataContext = this;
+            
         }
 
         private void AddLines()
         {
+            var plot = new PlotModel();
+
+            plot.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                Maximum = 50,
+                Minimum = -50,
+                TickStyle = TickStyle.Inside
+            });
+            plot.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Bottom,
+                Maximum = 50,
+                Minimum = -50,
+                TickStyle = TickStyle.Inside
+            });
+
             foreach (var cur in Lines)
             {
-                var line = new OxyPlot.Wpf.LineSeries();
+                var line = new LineSeries();
 
-                line.ItemsSource = cur;
-                var about = "";
-                foreach (var i in cur)
-                {
-                    about += $"({i.X},{i.Y})";
-                }
-                line.TrackerFormatString = about;
-                plot.Series.Add(line);
+                line.ItemsSource = new List<DataPoint>(cur);
+                //var about = "";
+                //foreach (var i in cur)
+                //{
+                //    about += $"({i.X},{i.Y})";
+                //}
+                //line.TrackerFormatString = about;
+                plot.Series.Add(line);            
             }
+            Model = plot;
+            
         }
 
         private void NewLine(DataPoint point1, DataPoint point2)
@@ -54,13 +78,7 @@ namespace MinSpanningTree.UI
             line.Add(point2);
         }
 
-        private void NewLine(double x1, double y1,double x2, double y2)
-        {
-            var point1 = new DataPoint(x1, y1);
-            var point2 = new DataPoint(x2, y2);
-            NewLine(point1, point2);
-        }
-
+        #region PointService
         public void AddPointCommand(object sender, RoutedEventArgs e)
         {
             try
@@ -70,8 +88,8 @@ namespace MinSpanningTree.UI
                 if (Points.Add(new DataPoint(_x, _y)))
                     MessageBox.Show($"Точку ({_x}, {_y}) додано");
                 else MessageBox.Show($"Точка ({_x}, {_y}) існує");
-                x.Text = "";
-                y.Text = "";
+                x.Text = "0,0";
+                y.Text = "0,0";
             }
             catch { }
         }
@@ -92,17 +110,51 @@ namespace MinSpanningTree.UI
         {
             PointService.Save(Points);
         }
+        #endregion
 
         public void ReloadCommand(object sender, RoutedEventArgs e)
         {
+            StartKruskal();
+            AddLines();           
+        }
+
+        private void StartKruskal()
+        {
+            if (Points.Count == 0) return;
+            Adjacency adjacency = new Adjacency(Points.Count);
+            var points = new List<DataPoint>(Points);
+         
+            var p = new List<KeyValuePair<float, float>>();
+            foreach (var cur in points)
+            {
+                p.Add(new KeyValuePair<float, float>(
+                    Convert.ToSingle(cur.X),
+                    Convert.ToSingle(cur.Y)
+                    ));
+            }
+
+            var links = Triangulator.Triangulation.Get(p);
+            foreach (var cur in links)
+            {
+                adjacency.setWeight(cur.Key, cur.Value,
+                                    Weight(points[cur.Key], points[cur.Value]) );
+            }
+
+            KruskalMST mst = new KruskalMST();
+            var A = mst.MSTKruskal(points.Count, adjacency);
+
             Lines.Clear();
 
-            var list = new List<DataPoint>();
-            list.Add(new DataPoint(0, 0));
-            list.Add(new DataPoint(1, 2));
-            Lines.Add(list);
-            AddLines();
-            
+            //виведення ребер
+            foreach(var cur in A)
+                if (cur != null)
+                    this.NewLine(points[cur.U], points[cur.V]);
+        }
+
+        private double Weight(DataPoint point1, DataPoint point2)
+        {
+            return Math.Sqrt((point1.X - point2.X) * (point1.X - point2.X) +
+                (point1.Y - point2.Y) * (point1.Y - point2.Y));
         }
 
     }

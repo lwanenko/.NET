@@ -51,20 +51,38 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Duality, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AdamsLair.Duality.2.1.1\lib\Duality.dll</HintPath>
+    </Reference>
+    <Reference Include="DualityPrimitives, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AdamsLair.Duality.Primitives.2.0.0\lib\DualityPrimitives.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FarseerDuality, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AdamsLair.FarseerDuality.4.0.3\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\FarseerDuality.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NVorbis, Version=0.7.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AdamsLair.NVorbis.0.7.5\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\NVorbis.dll</HintPath>
     </Reference>
     <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
     </Reference>
     <Reference Include="OxyPlot.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Wpf.1.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="SnowyPeak.Duality.Frozen.core, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SnowyPeak.Duality.Plugin.Frozen.Core.2.0.1\lib\SnowyPeak.Duality.Frozen.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SnowyPeak.Duality.Frozen.Procedural.core, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SnowyPeak.Duality.Plugin.Frozen.Procedural.2.0.1\lib\SnowyPeak.Duality.Frozen.Procedural.core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -145,6 +163,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kruskal\Kruskal.csproj">
+      <Project>{998e755d-195c-42ef-a2bf-9e5bf144a9a1}</Project>
+      <Name>Kruskal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Triangulator\Triangulator.csproj">
+      <Project>{2035b711-caba-407d-9b92-755d2c80d673}</Project>
+      <Name>Triangulator</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
