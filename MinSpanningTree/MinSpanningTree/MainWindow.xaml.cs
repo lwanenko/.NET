@@ -1,8 +1,8 @@
-﻿using Kruskal;
-using MinSpanningTree.Services;
+﻿using MinSpanningTree.Services;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using Prim_s;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -25,10 +25,11 @@ namespace MinSpanningTree.UI
         {
             InitializeComponent();
 
-            
-
             Lines = new List<List<DataPoint>>();
             Points = PointService.GetPoints();
+
+            while (Points.Count < 5000)
+                AddRandCommand(null, null);
 
             ReloadCommand(null,null);
             this.DataContext = this;
@@ -42,15 +43,15 @@ namespace MinSpanningTree.UI
             plot.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Left,
-                Maximum = 50,
-                Minimum = -50,
+                Maximum = 200,
+                Minimum = 0,
                 TickStyle = TickStyle.Inside
             });
             plot.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Bottom,
-                Maximum = 50,
-                Minimum = -50,
+                Maximum = 200,
+                Minimum = 0,
                 TickStyle = TickStyle.Inside
             });
 
@@ -59,6 +60,8 @@ namespace MinSpanningTree.UI
                 var line = new LineSeries();
 
                 line.ItemsSource = new List<DataPoint>(cur);
+                line.LineStyle = LineStyle.Solid;
+                line.BrokenLineStyle = LineStyle.Solid;
                 //var about = "";
                 //foreach (var i in cur)
                 //{
@@ -76,6 +79,8 @@ namespace MinSpanningTree.UI
             var line = new List<DataPoint>();
             line.Add(point1);
             line.Add(point2);
+            
+            Lines.Add(line);
         }
 
         #region PointService
@@ -94,14 +99,14 @@ namespace MinSpanningTree.UI
             catch { }
         }
 
+        Random random  = new Random();
         public void AddRandCommand(object sender, RoutedEventArgs e)
         {
             if (Points == null) Points = new HashSet<DataPoint>();
-            Random random = new Random();
-            var _x = random.NextDouble()* random.Next(50);
-            var _y = random.NextDouble() * random.Next(50);
+            var _x = random.Next(200);
+            var _y = random.Next(200);
             if (Points.Add(new DataPoint(_x, _y)))
-                MessageBox.Show($"Точку ({_x}, {_y}) додано");
+                ;// MessageBox.Show($"Точку ({_x}, {_y}) додано");
             else AddRandCommand(sender, e);
 
         }
@@ -114,14 +119,14 @@ namespace MinSpanningTree.UI
 
         public void ReloadCommand(object sender, RoutedEventArgs e)
         {
-            StartKruskal();
+            StartMST();
             AddLines();           
         }
 
-        private void StartKruskal()
+        private void StartMST()
         {
             if (Points.Count == 0) return;
-            Adjacency adjacency = new Adjacency(Points.Count);
+            
             var points = new List<DataPoint>(Points);
          
             var p = new List<KeyValuePair<float, float>>();
@@ -134,21 +139,24 @@ namespace MinSpanningTree.UI
             }
 
             var links = Triangulator.Triangulation.Get(p);
+
+            var adjacency = new List<Edge>();
             foreach (var cur in links)
             {
-                adjacency.setWeight(cur.Key, cur.Value,
-                                    Weight(points[cur.Key], points[cur.Value]) );
+                this.NewLine(points[cur.Key], points[cur.Value]);
+                adjacency.Add(new Edge ( cur.Key, cur.Value,
+                                         Weight(points[cur.Key], points[cur.Value]) 
+                                       ) 
+                             );
             }
+           var edges = MST.algorithmByPrim( Points.Count, adjacency);
+        
+        Lines.Clear();
 
-            KruskalMST mst = new KruskalMST();
-            var A = mst.MSTKruskal(points.Count, adjacency);
-
-            Lines.Clear();
-
-            //виведення ребер
-            foreach(var cur in A)
+            ////виведення ребер
+            foreach (var cur in edges)
                 if (cur != null)
-                    this.NewLine(points[cur.U], points[cur.V]);
+                    this.NewLine(points[cur.v1], points[cur.v2]);
         }
 
         private double Weight(DataPoint point1, DataPoint point2)

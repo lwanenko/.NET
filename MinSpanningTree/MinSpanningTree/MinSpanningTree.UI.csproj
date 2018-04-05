@@ -108,6 +108,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PlotWindow.xaml.cs">
+      <DependentUpon>PlotWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\PointService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -121,6 +124,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PlotWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -165,9 +172,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kruskal\Kruskal.csproj">
-      <Project>{998e755d-195c-42ef-a2bf-9e5bf144a9a1}</Project>
-      <Name>Kruskal</Name>
+    <ProjectReference Include="..\Prim_s\Prim_s.csproj">
+      <Project>{1da10a4f-9768-43e0-bfc6-43de466944b3}</Project>
+      <Name>Prim_s</Name>
     </ProjectReference>
     <ProjectReference Include="..\Triangulator\Triangulator.csproj">
       <Project>{2035b711-caba-407d-9b92-755d2c80d673}</Project>

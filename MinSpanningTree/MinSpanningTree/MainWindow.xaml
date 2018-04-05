@@ -39,5 +39,6 @@
             <Button  Grid.Row="4" Content="Додати випадкову точку" Click ="AddRandCommand"/>
             <Button  Grid.Row="5" Content="Зберегти" Click ="SaveCommand"/>
        </Grid>
+        
     </Grid>
 </Window>
