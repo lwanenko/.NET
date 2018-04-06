@@ -28,7 +28,7 @@ namespace MinSpanningTree.UI
             Lines = new List<List<DataPoint>>();
             Points = PointService.GetPoints();
 
-            while (Points.Count < 5000)
+            while (Points.Count < 1000)
                 AddRandCommand(null, null);
 
             ReloadCommand(null,null);
@@ -62,12 +62,6 @@ namespace MinSpanningTree.UI
                 line.ItemsSource = new List<DataPoint>(cur);
                 line.LineStyle = LineStyle.Solid;
                 line.BrokenLineStyle = LineStyle.Solid;
-                //var about = "";
-                //foreach (var i in cur)
-                //{
-                //    about += $"({i.X},{i.Y})";
-                //}
-                //line.TrackerFormatString = about;
                 plot.Series.Add(line);            
             }
             Model = plot;
@@ -149,11 +143,11 @@ namespace MinSpanningTree.UI
                                        ) 
                              );
             }
-           var edges = MST.algorithmByPrim( Points.Count, adjacency);
-        
-        Lines.Clear();
+            var edges = MST.algorithmByPrim(Points.Count, adjacency);
 
-            ////виведення ребер
+            Lines.Clear();
+
+            //виведення ребер
             foreach (var cur in edges)
                 if (cur != null)
                     this.NewLine(points[cur.v1], points[cur.v2]);
