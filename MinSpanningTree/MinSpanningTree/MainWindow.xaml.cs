@@ -28,7 +28,7 @@ namespace MinSpanningTree.UI
             Lines = new List<List<DataPoint>>();
             Points = PointService.GetPoints();
 
-            while (Points.Count < 1000)
+            while (Points.Count < 5000)
                 AddRandCommand(null, null);
 
             ReloadCommand(null,null);
@@ -143,7 +143,7 @@ namespace MinSpanningTree.UI
                                        ) 
                              );
             }
-            var edges = MST.algorithmByPrim(Points.Count, adjacency);
+            var edges = MST.algorithmByPrim(Points.Count, adjacency.ToArray());
 
             Lines.Clear();
 
