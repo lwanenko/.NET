@@ -28,7 +28,7 @@ namespace MinSpanningTree.UI
             Lines = new List<List<DataPoint>>();
             Points = PointService.GetPoints();
 
-            while (Points.Count < 5000)
+            while (Points.Count < 10000)
                 AddRandCommand(null, null);
 
             ReloadCommand(null,null);

@@ -36,7 +36,7 @@ namespace Prim_s
             Random rand = new Random();
             usedV[rand.Next(0, numberV)] = true;
 
-            while (notUsedV > 0)
+            while (true)
             {
                 int minE = -1; //номер найменшого ребра
                                //пошук найменшого ребра
@@ -47,10 +47,10 @@ namespace Prim_s
                     if ((usedV[edge.v1] == true) && (usedV[edge.v2] == false) ||
                         (usedV[edge.v2] == true) && (usedV[edge.v1] == false))
                     {
-                        if (minE != -1)
+                        if (minE == -1)
                         {
-                            if (notUsedEdges[i].weight < notUsedEdges[minE].weight)
-                                minE = i;
+                            minEWeight = edge.weight;
+                            minE = i;
                         }
                         else if (minEWeight > edge.weight)
                         {
@@ -60,6 +60,8 @@ namespace Prim_s
                     }
                     i++;
                 }
+                if (minE == -1)
+                    break;
                 //заносим новую вершину в список использованных и удаляем ее из списка неиспользованных
                 usedV[notUsedEdges[minE].v1] = true;
                 usedV[notUsedEdges[minE].v2] = true;
