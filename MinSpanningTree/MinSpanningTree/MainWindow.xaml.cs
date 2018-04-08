@@ -28,12 +28,8 @@ namespace MinSpanningTree.UI
             Lines = new List<List<DataPoint>>();
             Points = PointService.GetPoints();
 
-            while (Points.Count < 10000)
-                AddRandCommand(null, null);
-
             ReloadCommand(null,null);
-            this.DataContext = this;
-            
+            this.DataContext = this;            
         }
 
         private void AddLines()
@@ -97,12 +93,14 @@ namespace MinSpanningTree.UI
         public void AddRandCommand(object sender, RoutedEventArgs e)
         {
             if (Points == null) Points = new HashSet<DataPoint>();
-            var _x = random.Next(200);
-            var _y = random.Next(200);
-            if (Points.Add(new DataPoint(_x, _y)))
-                ;// MessageBox.Show($"Точку ({_x}, {_y}) додано");
-            else AddRandCommand(sender, e);
-
+            for (int i = 0; i < Convert.ToInt32(randN.Text); i++)
+            {
+                var _x = random.Next(200);
+                var _y = random.Next(200);
+                if (!Points.Add(new DataPoint(_x, _y)))
+                    i--;
+            }
+            MessageBox.Show("Точки додано");
         }
 
         public void SaveCommand(object sender, RoutedEventArgs e)
@@ -113,8 +111,9 @@ namespace MinSpanningTree.UI
 
         public void ReloadCommand(object sender, RoutedEventArgs e)
         {
+            
             StartMST();
-            AddLines();           
+            AddLines();
         }
 
         private void StartMST()
@@ -143,7 +142,8 @@ namespace MinSpanningTree.UI
                                        ) 
                              );
             }
-            var edges = MST.algorithmByPrim(Points.Count, adjacency.ToArray());
+            var mst = new MST();
+            var edges = mst.algorithmByPrim(Points.Count, adjacency);
 
             Lines.Clear();
 

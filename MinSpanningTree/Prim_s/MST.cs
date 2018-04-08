@@ -4,74 +4,86 @@ using System.Text;
 
 namespace Prim_s
 {
-    public class Edge
-    {
-        public int v1, v2;
-
-        public double weight;
-
-        public Edge(int v1, int v2, double weight)
-        {
-            this.v1 = v1;
-            this.v2 = v2;
-            this.weight = weight;
-        }
-    }
-
     public class MST
     {
+        private List<Edge> MstEdges = new List<Edge>();
 
-        public static List<Edge>  algorithmByPrim(int numberV, Edge[] Edges)
+        private SortedSet<Edge>[] Edges;
+
+        private ISet<int> OpenV = new SortedSet<int>();
+
+        private bool[] UsedV;
+
+        public List<Edge>  algorithmByPrim(int numberV, List<Edge> edges)
         {
-            var mst = new List<Edge>();
-            //неиспользованные ребра
-            List<Edge> notUsedEdges = new List<Edge>(Edges);
-            //использованные вершины
-            var usedV = new bool [numberV];
-            
-            for (int i = 0; i < numberV; i++)
-                 usedV [i] = false;
-            int notUsedV = numberV; // кількість не використаних вершин
-            //випадкова початкова точка
-            Random rand = new Random();
-            usedV[rand.Next(0, numberV)] = true;
+            MstEdges.Clear();
+            OpenV.Clear();
 
-            while (true)
+            //невикористані ребра
+            Edges = new SortedSet<Edge> [numberV];
+            for(int i = 0; i < numberV; i++)
+                Edges[i] = new SortedSet<Edge>();
+            foreach(var cur in edges)
             {
-                int minE = -1; //номер найменшого ребра
-                               //пошук найменшого ребра
-                double minEWeight = 0; // значення на мін ребрі
-                int i = 0;
-                foreach (var edge in notUsedEdges)
+                var _cur = new Edge(cur.v2, cur.v1, cur.weight);
+                Edges[cur.v1].Add(cur);
+                Edges[cur.v2].Add(_cur);
+            }
+            
+            //використані вершини
+            UsedV = new bool [numberV];           
+            for (int i = 0; i < numberV; i++)
+                UsedV [i] = false;
+
+            //додаємо початкову вершину 0
+            UsedV[0] = true;
+            AddOpenV(0);
+
+            while(OpenV.Count != 0)
+            {
+                Edge minE = null;
+                int newV = -1;
+                foreach (var v  in OpenV )
                 {
-                    if ((usedV[edge.v1] == true) && (usedV[edge.v2] == false) ||
-                        (usedV[edge.v2] == true) && (usedV[edge.v1] == false))
+                    foreach (var edge in Edges[v])
                     {
-                        if (minE == -1)
+                        if (minE != null)
                         {
-                            minEWeight = edge.weight;
-                            minE = i;
+                            if (UsedV[edge.v2] && minE.weight > edge.weight)
+                            {
+                                minE = edge;
+                                break;
+                            }
                         }
-                        else if (minEWeight > edge.weight)
+                        else if (UsedV[edge.v2])
                         {
-                            minEWeight = edge.weight;
-                            minE = i;
+                            minE = edge;
+                            break;
                         }
                     }
-                    i++;
                 }
-                if (minE == -1)
-                    break;
-                //заносим новую вершину в список использованных и удаляем ее из списка неиспользованных
-                usedV[notUsedEdges[minE].v1] = true;
-                usedV[notUsedEdges[minE].v2] = true;
-                notUsedV--;
-                //заносим новое ребро в дерево и удаляем его из списка неиспользованных
-                mst.Add(notUsedEdges[minE]);
-                notUsedEdges.RemoveAt(minE);
 
+                newV = minE.v1;
+                //Заносимо нову вершину в списки
+                UsedV[newV] = true;
+                OpenV.Remove(newV);
+                AddOpenV(newV);
+
+                //заносим мінімальне ребро в кістякове дерево
+                MstEdges.Add(minE);
             }
-            return mst;
+            return MstEdges;
+        }
+
+        /// <summary>
+        /// Оновлює список відкритих вершин
+        /// </summary>
+        /// <param name="v"></param>
+        private void AddOpenV(int v)
+        {
+            foreach (var edge in Edges[v])
+                if (!UsedV[edge.v2])
+                    OpenV.Add(edge.v2);
         }
     }
     
