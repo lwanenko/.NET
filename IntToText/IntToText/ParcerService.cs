@@ -46,7 +46,7 @@ namespace IntToText
                 else if (i > 2)
                     list.Add(new Grade(NumberVal.Substring(i - 2, 3), DataGrade[GradeNum]));
                 else
-                    list.Add(new Grade(NumberVal.Substring(i,i+1), DataGrade[GradeNum], true));
+                    list.Add(new Grade(NumberVal.Substring(0,i+1), DataGrade[GradeNum], true));
                 i -= 3;
                 GradeNum++;
             }
