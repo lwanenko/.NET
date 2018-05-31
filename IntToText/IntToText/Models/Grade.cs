@@ -70,7 +70,7 @@ namespace IntToText.Models
                 CheckValInData(ref returnString, majorGrade);
 
                 if (val.Length == 1)
-                    return "";// 000
+                    return "";
                 val = val.Substring(1, val.Length - 1);
             } 
                 
