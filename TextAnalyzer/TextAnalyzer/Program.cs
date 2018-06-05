@@ -1,4 +1,5 @@
 ﻿using System;
+using TextAnalyzer.Metrics;
 using TextAnalyzer.Services;
 
 namespace TextAnalyzer
@@ -9,8 +10,13 @@ namespace TextAnalyzer
         {
             Console.WriteLine("Hello World!");
             var inputText = Input(@"C:\Users\HP\Source\Repos\.NET\TextAnalyzer\TextAnalyzer\Text.txt");
-            var service = new TrigramService();
-            Console.WriteLine(  service.Parce(inputText) );
+
+            var metric1 = new Metric1();
+            Console.WriteLine(  metric1.GetValue(inputText) );
+
+            var metric2 = new Metric2();
+            Console.WriteLine(  metric2.GetValue(inputText) );
+
             Console.ReadKey();
         }
 

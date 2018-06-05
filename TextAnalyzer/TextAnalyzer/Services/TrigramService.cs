@@ -17,7 +17,6 @@ namespace TextAnalyzer.Services
                     for (int i = 0; i < text.Length - 2; i++)
                     {
                         var key = text.Substring(i, 3);
-
                         if (Data.ContainsKey(key))
                             Data[key]++;
                         else

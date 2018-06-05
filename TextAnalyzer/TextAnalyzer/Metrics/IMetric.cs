@@ -7,9 +7,6 @@ namespace TextAnalyzer.Metrics
 {
     interface IMetric
     {
-        ITextService Service { get; }
-
-        int Value { get; }
-
+        int GetValue(string text);      
     }
 }
