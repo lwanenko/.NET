@@ -28,9 +28,9 @@ namespace IntToText
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.Write("\nPress any key to continue... ");
             }
-            Console.Read();
+            Console.ReadKey();
         }
 
         static void GoToUA()
